@@ -1,5 +1,5 @@
-const correctUsername = 'anais';
-const correctPassword = 'anais123';
+const correctUsername = 'Timmie';
+const correctPassword = 'mybaby2008';
 
 function login() {
   const username = document.getElementById('username').value.trim().toLowerCase();
