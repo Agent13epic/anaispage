@@ -11,9 +11,10 @@ function scatterQuotes() {
   quotes.forEach((quote) => {
     const span = document.createElement("span");
     span.textContent = quote;
-    span.style.top = `${Math.random() * 80 + 10}%`;
-    span.style.left = `${Math.random() * 80 + 10}%`;
+    span.style.top = `${Math.random() * 90 + 5}%`;
+    span.style.left = `${Math.random() * 90 + 5}%`;
     span.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+    span.style.animationDuration = `${8 + Math.random() * 4}s`;
     container.appendChild(span);
   });
 }
