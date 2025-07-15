@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome My Princess</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      background: linear-gradient(to right, #b799ff, #e0b3ff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .welcome-text {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 4rem;
+      margin: 80px 0 10px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .sub-text {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* Menu Styles */
+    .hamburger {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    .hamburger span {
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 80px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: right 0.3s ease;
+      z-index: 999;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Bible Verse */
+    .bible-verse {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.8);
+      color: #8000ff;
+      padding: 12px 20px;
+      border-radius: 20px;
+      max-width: 80%;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .welcome-text {
+        font-size: 3rem;
+      }
+      .sub-text {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu Button -->
+  <div class="hamburger menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav id="menu">
+    <a href="#" class="home-link">Home</a>
+    <a href="gallery.html">Photo Gallery</a>
+    <a href="countdown.html">Countdowns</a>
+    <a href="bucketlist.html">Bucket List</a>
+    <a href="reasons.html">Reasons I Love You</a>
+    <a href="surprise.html">Secret Surprise</a>
+    <a href="https://formsubmit.co/mzekavalentinemapri@gmail.com" target="_blank">💌 Request Something</a>
+  </nav>
+
+  <!-- Main Content -->
+  <h1 class="welcome-text">Welcome My Princess</h1>
+  <p class="sub-text">Every time I see you I give Thanks to God 🤍</p>
+
+  <!-- Bible Verse -->
+  <div class="bible-verse">
+    <p id="verse-text">"Love is patient, love is kind."</p>
+    <p id="verse-reference">1 Corinthians 13:4</p>
+  </div>
+
+  <script>
+    // Menu Toggle
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+      this.classList.toggle('active');
+    });
+
+    // Bible Verses
+    const bibleVerses = [
+      { text: "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.", reference: "1 Corinthians 13:4" },
+      { text: "Husbands, love your wives, just as Christ loved the church and gave himself up for her.", reference: "Ephesians 5:25" },
+      { text: "So now faith, hope, and love abide, these three; but the greatest of these is love.", reference: "1 Corinthians 13:13" }
+    ];
+    
+    function displayRandomVerse() {
+      const randomIndex = Math.floor(Math.random() * bibleVerses.length);
+      const verse = bibleVerses[randomIndex];
+      document.getElementById('verse-text').textContent = `"${verse.text}"`;
+      document.getElementById('verse-reference').textContent = verse.reference;
+    }
+    displayRandomVerse();
+  </script>
+</body>
+</html>
