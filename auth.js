@@ -8,7 +8,7 @@ function login() {
 
   if (username === correctUsername && password === correctPassword) {
     localStorage.setItem('loggedIn', 'true');
-    window.location.href = 'home.html';
+    window.location.href = 'home.html'; // Make sure this file exists!
   } else {
     error.textContent = 'Invalid username or password.';
     error.style.display = 'block';
@@ -20,18 +20,20 @@ function login() {
   }
 }
 
-// Improved auth check for protected pages
-function checkAuth() {
-  const isLoginPage = window.location.pathname.endsWith('index.html') || 
-                     window.location.pathname === '/';
+// Check authentication status when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Skip auth check on login page
+  if (window.location.pathname.endsWith('index.html') || 
+      window.location.pathname === '/' || 
+      window.location.pathname === '') {
+    return;
+  }
   
-  if (!isLoginPage && localStorage.getItem('loggedIn') !== 'true') {
+  // Redirect to login if not authenticated
+  if (localStorage.getItem('loggedIn') !== 'true') {
     window.location.href = 'index.html';
   }
-}
-
-// Run check when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', checkAuth);
+});
 
 // Add enter key support
 document.addEventListener('keypress', function(e) {
