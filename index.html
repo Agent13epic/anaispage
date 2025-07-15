@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome, My Love 💜</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="password.js"></script>
-  <script defer src="quotes.js"></script>
+  <meta charset="UTF-8" />
+  <title>Login to your world</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="auth.js"></script>
 </head>
 <body class="login-page">
   <div class="login-container">
-    <h1>Welcome, Anaïs 💜</h1>
-    <p>Enter your secret code to unlock our world.</p>
-    <input type="password" id="passwordInput" placeholder="Enter password...">
-    <button onclick="checkPassword()">Enter</button>
+    <h1>Welcome Love💘</h1>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Enter</button>
     <p id="error" class="error-message"></p>
-    <div id="quoteContainer" class="quote-background"></div>
   </div>
 </body>
 </html>
+
