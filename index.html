@@ -114,32 +114,47 @@
   </div>
 
   <script>
-    const correctUsername = 'Timmie';
-    const correctPassword = 'mybaby2008';
+    // Hardcoded credentials (Note: For demonstration only - not secure for production)
+    const correctCredentials = {
+      username: 'Timmie',
+      password: 'mybaby2008'
+    };
 
     function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-      const error = document.getElementById('error');
+      const userInput = document.getElementById('username').value.trim();
+      const passInput = document.getElementById('password').value;
+      const errorElement = document.getElementById('error');
+      const loginBox = document.querySelector('.login-box');
 
-      if (user === correctUsername && pass === correctPassword) {
-        window.location.href = 'home.html'; // Main site after login
+      // Simple validation
+      if (userInput === correctCredentials.username && passInput === correctCredentials.password) {
+        // Successful login - redirect (in a real app, use proper authentication)
+        window.location.href = 'home.html'; 
       } else {
-        error.style.display = 'block';
-        document.querySelector('.login-box').classList.add('shake');
+        // Show error and shake effect
+        errorElement.style.display = 'block';
+        loginBox.classList.add('shake');
+        
+        // Clear fields after delay
         setTimeout(() => {
-          document.querySelector('.login-box').classList.remove('shake');
-          error.style.display = 'none';
+          loginBox.classList.remove('shake');
+          errorElement.style.display = 'none';
+          document.getElementById('password').value = ''; // Clear password only
         }, 2000);
       }
     }
 
-    // Add event listener for Enter key
+    // Handle Enter key press
     document.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         login();
       }
     });
+
+    // Auto-focus username field on page load
+    window.onload = function() {
+      document.getElementById('username').focus();
+    };
   </script>
 </body>
 </html>
