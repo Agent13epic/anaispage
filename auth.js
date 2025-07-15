@@ -1,5 +1,5 @@
-const correctUsername = 'Timmie';
-const correctPassword = 'mybaby2008';
+const correctUsername = 'anais';
+const correctPassword = 'anais123';
 
 function login() {
   const username = document.getElementById('username').value.trim().toLowerCase();
@@ -10,7 +10,7 @@ function login() {
     localStorage.setItem('loggedIn', 'true');
     window.location.href = 'home.html';
   } else {
-    error.textContent = 'Invalid username or password babe🤭.';
+    error.textContent = 'Invalid username or password.';
   }
 }
 
