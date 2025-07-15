@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #333;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        h1 {
+            color: #d23669;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: #ff6b81;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .verse-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        #verse-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        #verse-reference {
+            font-weight: bold;
+            color: #d23669;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-btn {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-btn:hover {
+            background: #d23669;
+            transform: translateY(-3px);
+        }
+        
+        .music-player {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .music-btn {
+            background: #d23669;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #nowPlaying {
+            font-style: italic;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="floating-heart" style="top:10%;left:5%">❤️</div>
+    <div class="floating-heart" style="top:20%;right:10%">💖</div>
+    <div class="floating-heart" style="bottom:15%;left:15%">💕</div>
+    
+    <div class="container">
+        <h1>Welcome Baby ❤️</h1>
+        <h2>Happy to call you mine</h2>
+        
+        <!-- Dynamic Bible Verse -->
+        <div class="verse-container">
+            <p id="verse-text">Loading verse...</p>
+            <p id="verse-reference"></p>
+        </div>
+        
+        <!-- Features Navigation -->
+        <div class="features">
+            <button class="feature-btn" onclick="location.href='features/love-letters.html'">💌 Love Letters</button>
+            <button class="feature-btn" onclick="location.href='features/gallery.html'">📸 Gallery</button>
+            <button class="feature-btn" onclick="location.href='features/jokes.html'">😂 Inside Jokes</button>
+            <button class="feature-btn" onclick="location.href='features/bucket-list.html'">✨ Bucket List</button>
+            <button class="feature-btn" onclick="location.href='features/requests.html'">🛎️ Requests</button>
+            <button class="feature-btn" onclick="location.href='features/music.html'">🎵 Our Songs</button>
+        </div>
+        
+        <!-- Music Player -->
+        <div class="music-player">
+            <button class="music-btn" id="playBtn">▶️</button>
+            <button class="music-btn" id="prevBtn">⏮️</button>
+            <button class="music-btn" id="nextBtn">⏭️</button>
+            <span id="nowPlaying">Select a song</span>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="bgMusic" loop></audio>
+
+    <script>
+        // Bible Verses
+        async function loadRandomVerse() {
+            try {
+                const response = await fetch('assets/verses.json');
+                const verses = await response.json();
+                const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+                
+                document.getElementById('verse-text').textContent = `"${randomVerse.text}"`;
+                document.getElementById('verse-reference').textContent = randomVerse.reference;
+            } catch (error) {
+                console.error("Error loading verses:", error);
+                document.getElementById('verse-text').textContent = `"Love never fails."`;
+                document.getElementById('verse-reference').textContent = "1 Corinthians 13:8";
+            }
+        }
+        
+        // Music Player
+        const songs = [
+            {title: "Our Song 1", file: "song1.mp3"},
+            {title: "Our Song 2", file: "song2.mp3"},
+            // Add all 35 songs
+        ];
+        
+        let currentSongIndex = 0;
+        const audioPlayer = document.getElementById('bgMusic');
+        
+        function playSong(index) {
+            currentSongIndex = index;
+            audioPlayer.src = `assets/audio/${songs[index].file}`;
+            audioPlayer.play();
+            document.getElementById('nowPlaying').textContent = `Now Playing: ${songs[index].title}`;
+        }
+        
+        // Event Listeners
+        document.getElementById('playBtn').addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                document.getElementById('playBtn').textContent = "⏸️";
+            } else {
+                audioPlayer.pause();
+                document.getElementById('playBtn').textContent = "▶️";
+            }
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            const nextIndex = (currentSongIndex + 1) % songs.length;
+            playSong(nextIndex);
+        });
+        
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            const prevIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            playSong(prevIndex);
+        });
+        
+        // Initialize
+        window.onload = function() {
+            loadRandomVerse();
+            // Start with first song (autoplay blocked by browsers)
+            playSong(0);
+            audioPlayer.volume = 0.5; // Lower volume
+            
+            // Change verse every 2 minutes
+            setInterval(loadRandomVerse, 120000);
+        };
+    </script>
+</body>
+</html>
