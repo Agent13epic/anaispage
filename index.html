@@ -2,23 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login to Our Love</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="auth.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login | For My Love</title>
+  <style>
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #b799ff, #e0b3ff);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+      z-index: 2;
+      user-select: none;
+    }
+
+    .login-box.shake {
+      animation: shake 0.4s ease;
+    }
+
+    .login-box h2 {
+      margin-bottom: 1rem;
+      color: #8000ff;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #8000ff;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 95%;
+    }
+
+    button:hover {
+      background-color: #5a00b0;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .quote {
+      position: absolute;
+      font-size: 0.85rem;
+      color: white;
+      opacity: 0.8;
+      max-width: 150px;
+      animation: float 4s ease-in-out infinite;
+      user-select: none;
+    }
+
+    .quote:nth-child(1) { top: 10%; left: 5%; }
+    .quote:nth-child(2) { top: 20%; right: 5%; }
+    .quote:nth-child(3) { bottom: 15%; left: 10%; }
+    .quote:nth-child(4) { bottom: 10%; right: 10%; }
+  </style>
 </head>
-<body class="login-page">
-  <div class="login-container">
-    <h1>Welcome Love</h1>
+<body>
+  <div class="quote">"every set back is a set up for greater thing"<br>– Anais</div>
+  <div class="quote">"les fous ne marchent pas avec les sages"<br>– Anais</div>
+  <div class="quote">"live love laugh wicked"<br>– Anais</div>
+  <div class="quote">"we can only be wicked together"<br>– Anais</div>
+
+  <div class="login-box" id="loginBox">
+    <h2>Welcome, My Love 💜</h2>
     <input type="text" id="username" placeholder="Username" />
     <input type="password" id="password" placeholder="Password" />
-    <button onclick="login()">Enter</button>
-    <p id="error" class="error-message"></p>
+    <button onclick="login()">Login</button>
+    <div class="error" id="error">Wrong username or password 😢</div>
   </div>
 
-  <!-- Quotes fixed in corners -->
-  <div class="quote top-left">"every set back is a set up for greater thing" – Anais</div>
-  <div class="quote top-right">"les fous ne marchent pas avec les sages" – Anais</div>
-  <div class="quote bottom-left">"live love laugh wicked" – Anais</div>
-  <div class="quote bottom-right">"we can only be wicked together" – Anais</div>
+  <script>
+    const correctUsername = 'timmie';
+    const correctPassword = 'mybaby2008';
+
+    function login() {
+      const user = document.getElementById('username').value.trim().toLowerCase();
+      const pass = document.getElementById('password').value;
+      const error = document.getElementById('error');
+      const box = document.getElementById('loginBox');
+
+      if (user === correctUsername && pass === correctPassword) {
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = 'home.html'; // redirect to your home page
+      } else {
+        error.style.display = 'block';
+        box.classList.add('shake');
+        setTimeout(() => {
+          error.style.display = 'none';
+          box.classList.remove('shake');
+        }, 2000);
+      }
+    }
+
+    // If already logged in, redirect to home immediately
+    window.onload = () => {
+      if (localStorage.getItem('loggedIn') === 'true') {
+        window.location.href = 'home.html';
+      }
+    };
+  </script>
 </body>
 </html>
